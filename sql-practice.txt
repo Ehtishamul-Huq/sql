@@ -195,13 +195,7 @@ select city, group_concat(student_name) as 'Student Names' from students group b
 -- q8.write a query to fetch the names of students starting with 'A'?
 select student_id, student_name from students where student_name like 'A%';
 
--- q9.write a query to fetch the count of students' names having the same marks in each course?
--- TODO
-select course_name,marks,group_concat(student_name) as 'Student Names' from students s inner join course c on s.student_id = c.student_id group by marks;
-select tmp.*,count(tmp.student_name) from (select (student_name),marks,course_name, dense_rank() over(partition by course_name) as total_students from students s inner join course c on c.student_id = s.student_id) tmp group by marks;
-select *, count(student_name) over(partition by course_name order by marks desc) as count from students s inner join course c on s.student_id = c.student_id;
-
--- q10.write a query to fetch the count of students from each city?
+-- q9.write a query to fetch the count of students from each city?
 select city,count(student_name) as total_strength from students group by city;
 
 --- 8
